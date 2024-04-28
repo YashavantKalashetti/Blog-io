@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>About</title>
+    <link rel="stylesheet" href="/css/about.css
+    ">
+</head>
+<body style="background-color: #f7f2e0;">
+    <%- include('./partials/nav') %>
+
+    <div class="container" style="padding: 2vw 5vw;">
+        
+        <div>
+           <h2>Our Story</h2>
+           <br>
+            Welcome to a blogging platform where a dedicated team of developers is at your service, ensuring that your creative vision takes center stage. Our expert developers are committed to providing you with cutting-edge tools and resources, empowering you to bring your ideas to life effortlessly.
+
+            With a focus on innovation, our team ensures that the platform remains at the forefront of technological advancements. From seamless integrations to robust features, our dedicated developers work tirelessly to enhance your blogging experience, making it both powerful and user-friendly.
+
+            Experience the confidence of having a team of professionals dedicated to refining every aspect of your website. Your vision is their priority, and they're here to ensure that your blog not only meets but exceeds the highest standards of functionality and design.
+        </div>
+
+        <div class="row mt-5">
+
+            <h2>Our Team</h2>
+
+            <% allAdmins.forEach(function (admin, i) { %>
+                <div class="row">
+
+                    <div class="col-md-5 mt-3">
+                        <div class="container mt-2 mb-2" style="display: flex;flex-direction: column;padding:5px;">
+                            <div>
+                                <div class="gallery" style="overflow: hidden;">
+                                    <div class="card">
+
+                                        <div class="card__side front-side" style="background-image: url('<%= admin.profileImageURL %>')">
+                                        </div>
+                                        
+                                        <div class="card__side card__side--back">
+                                            <div id="zoom" style="backdrop-filter: blur(100px);padding: 2vw;border-radius: 15px;"> 
+
+                                                <% if (admin.instagramURL.length !== 0) { %>
+                                                    <a  href="<%= admin.instagramURL %>" target="_blank" >
+                                                        <img class="socialmedia" src="/images/instagram.jpg" alt="Instagram Link">Instagram</a><br>
+                                                <% } %>
+
+                                                <% if (admin.githubURL.length !== 0) { %>
+                                                    <a href="<%= admin.githubURL %>" target="_blank" >
+                                                        <img class="socialmedia" src="/images/github.jpg" alt="Git link">GitHub</a><br>
+                                                <% } %>
+
+                                                <% if (admin.linkedinURL.length !== 0) { %>
+                                                    <a href="<%= admin.linkedinUR %>" target="_blank">
+                                                        <img class="socialmedia" src="/images/linkedin.jpg" alt="LinkedIn Link">LinkedIn</a><br>
+                                                <% } %>
+
+                                                <a href="mailto:<%= admin.email %>" target="_blank">
+                                                    <img class="socialmedia" src="/images/email.jpg" alt="Email Link">Email</a>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="col-md-7 mt-3" style="display: flex;flex-direction: column;justify-content: center;">
+                        <h2><%= admin.fullName  %></h2>
+                        <h5><%= admin.role  %></h5> <br>
+                        <p><%= admin.roleDescription  %></p>
+                    </div>
+
+                </div>
+            <% }) %>
+
+        </div>
+
+        <div class="mt-5">
+            <h2 style="margin-bottom: 15px;">Contact Us</h2>
+            <div style="font-size: 20px;">
+                MR Blog Avenue<br>
+                270 Lafayette Street, Ste 1300 <br>
+                New York, NY 10012 <br> <br>
+
+                <h5>For general inquiries, please call us at 212-966-7174. For all other inquiries, please visit our <a href="/About/contact" style="color: blue;">Contact page</a>.</h5>
+            </div> 
+        </div>
+
+    </div>
+
+
+    <%- include("./partials/scripts") %>
+
+</body>
+</html>

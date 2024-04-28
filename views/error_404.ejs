@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Error</title>
+
+    <link rel="stylesheet" href="/css/home.css">
+
+    <style>
+        img {
+            animation: fadeInAnimation ease 2s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+        
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(360deg);
+                
+            }
+        }
+        footer{
+            color: rgb(0, 0, 0);
+            background-color: rgb(246, 249, 231);
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body style="background-color: #122a50;">
+    <%- include('./partials/nav') %>
+
+    <div class="container mt-4" style="text-align: center;">
+        <img src="/images/error-404.png" alt="404 Error" style="width: 90%;">
+    </div>
+
+    <%- include("./partials/footer") %>
+
+    <%- include("./partials/scripts") %>
+</body>
+</html>

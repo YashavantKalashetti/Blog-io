@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Add new Blog</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <style>
+        h4{
+            text-decoration: underline;
+        }
+
+        .nav-link:hover{
+            border-bottom: 3.5px solid red;
+            padding: 5px;
+            color: white;
+        }
+    </style>
+</head>
+<body style="background-color: rgb(212, 231, 251);">
+    <%- include('./partials/nav') %>
+    
+    <div class="container mt-5" style="border: 2px solid rgb(255, 172, 99);">
+        <form action="/blog/add-new" method="post" enctype="multipart/form-data">
+
+            <div class="mb-3 mt-3">
+                <h5 for="coverImage" class="form-label">Cover Image</h5>
+                <input type="file" class="form-control" id="coverImage" name="coverImage" aria-describedby="title" required>
+            </div>
+
+            <div class="mb-3">
+                <h5 for="title" class="form-label">Title</h5>
+                <input type="text" class="form-control" id="title" name="title" aria-describedby="title" required>
+            </div>
+
+            <div class="mb-3">
+                <h5 for="category" class="form-label">Category</h5>
+                <select class="form-select" id="inputGroupSelect01" name="category">
+                  <option selected>Choose a Category</option>
+                  <option value="Biography">Biography</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Travelling">Travelling</option>
+                  <option value="Health and Fitness">Health and Fitness</option>
+                  <option value="Lifestyle">Lifestyle</option>
+                  <option value="Business">Business</option>
+                  <option value="Others">Others</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <h5 for="body" class="form-label">Body</h5>
+                <textarea name="body" class="form-control" id="body"  rows="15" required 
+                placeholder="Give a brief description for your blog."></textarea>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <%- include("./partials/footer") %>    
+
+    <%- include("./partials/scripts") %>
+</body>
+</html>

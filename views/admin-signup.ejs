@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/sign-in-up.css">
+    <style>
+        .inner-container{
+            width: clamp(280px,70vw,1000px);
+            backdrop-filter: blur(50px);
+            background-color: transparent;
+            border: 1px solid black;
+            border-radius: 15px;
+        }    
+    </style>
+</head>
+<body>
+
+    <h2 style="margin: 1.5vw 0 0 1.5vw;color: #248cd2;">MR_BLOGS</h2>
+    
+    <div class="outer-container">
+        <div class="inner-container">
+            <h1 style="padding: 15px 0 0 22px;color: palevioletred;
+            font-family:Tilt Neon;">Sign Up</h1>    
+            <div class="input-container m-2" >
+
+                <form action="/user/admin-signup" method="POST" enctype="multipart/form-data">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group m-3">
+                                <label class="mb-2">Full Name:</label><br>
+                                <input class="form-control" type="text" name="fullName" id="fullName" required>
+                            </div>
+        
+                            <div class="form-group m-3">
+                                <label class="mb-2">Email:</label><br>
+                                <input class="form-control"  type="text" name="email" id="email" required>
+                                <small class="invalid-email" style="color: crimson;"><%= locals.accountExists %></small>
+                            </div>
+
+                            <div class="form-group m-3">
+                                <label class="mb-2">Cover Image:</label><br>
+                                <input type="file" class="form-control" id="coverImage" name="coverImage" aria-describedby="title" required>
+                            </div>
+        
+                            <div class="form-group m-3">
+                                <label class="mb-2">Role: (All Capital)</label><br>
+                                <input class="form-control" type="text" name="role" id="role" required>
+                            </div>
+
+                            <div class="form-group m-3">
+                                <label class="mb-2">Role Description:</label><br>
+                                <textarea name="roleDescription" class="form-control" id="body"  rows="5" required 
+                                    placeholder="Give a brief description for your role"></textarea>
+                            </div>
+         
+                        </div>
+
+
+                        <div class="col-md-6">
+        
+                            <div class="form-group m-3">
+                                <label class="mb-2">Instagram URL:</label><br>
+                                <input class="form-control" type="text" name="instagramURL" id="instagramURL">
+                            </div>
+        
+                            <div class="form-group m-3">
+                                <label class="mb-2">Github URL:</label><br>
+                                <input class="form-control" type="text" name="githubURL" id="githubURL">
+                            </div>
+        
+                            <div class="form-group m-3">
+                                <label class="mb-2">LinkedIn URL:</label><br>
+                                <input class="form-control" type="text" name="linkedinURL" id="linkedinURL">
+                            </div>
+
+                            <div class="form-group m-3">
+                                <label class="mb-2">Password:</label><br>
+                                <input class="form-control" type="password" name="password" id="password" required>
+                            </div>
+        
+                            <div class="form-group m-3">
+                                <label class="mb-2" style="background-color: rgb(52, 239, 52);padding: 0px 10px;border-radius: 5px;">Admin Key:</label><br>
+                                <input class="form-control" type="text" name="adminKey" id="adminKey" required>
+                                <small class="invalid-email" style="color: crimson;"><%= locals.adminKeyError %></small>
+                            </div>
+            
+                            <div class="form-group ">
+                                <button type="submit" class="login-button">Sign Up</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <%- include('./partials/scripts') %>
+</body>
+</html>

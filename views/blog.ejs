@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/css/blog.css">
+</head>
+<body>
+    <%- include('./partials/nav') %>
+
+
+    <div class="container mt-4" style="display: flex;flex-direction: column;background-color: rgb(213, 207, 207);border-radius: 15px; align-items: center;">
+        <h1 style="margin: 10px;"><%= blog.title %></h1>
+        <div class="img-container m-4">
+            <img src="<%= blog.coverImageURL %>" alt="blog Cover Page">
+        </div>
+        <pre style="margin-top: 20px;font-size: large;border: 2px solid black;padding: 10px 15px; width: 100%;white-space: pre-wrap;line-height: 1.5;margin-bottom: 1em;font-family:sans-serif;"><%= blog.body %></pre>
+    </div>
+
+    <div class="container mt-4">
+        <button class="URL btn btn-outline-primary" onclick="copyURL()">&#x2750 Share Blog </button>
+    </div>
+
+    <div class="container mt-4" style="background-color: rgb(220, 238, 255); padding: 10px;margin-bottom: 30px;">
+        <img src="<%= blog.createdBy.profileImageURL %>" alt="Creator's Profile" width="100px" style="border-radius: 25px;">
+        <p style="margin:8px 0px 0px 2px;">Published By : <%= blog.createdBy.fullName %> </p>
+        <p style="margin:8px 0px 0px 2px;">Published On : <%= (JSON.stringify(blog.createdAt).split("T")[0]).split("\"")[1] %> </p>
+    </div>
+
+    <%- include("./partials/scripts") %>
+    <script>
+        function copyURL() {
+        var copyText = window.location,href;
+        navigator.clipboard.writeText(copyText);
+
+        const element = document.querySelector(".URL");
+        element.innerHTML = "&#9989 URL Coppied Sucessfully !!!"
+        element.classList.toggle("btn-outline-primary");
+        element.classList.toggle("btn-outline-success");
+
+        setTimeout(function() {
+            document.querySelector(".URL").innerHTML = "&#x2750 Share Blog "
+            element.classList.toggle("btn-outline-primary");
+            element.classList.toggle("btn-outline-success");
+        }, 2500);
+
+        }
+    </script>
+</body>
+</html>

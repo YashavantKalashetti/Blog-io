@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Contact</title>
+    <link rel="stylesheet" href="/css/about.css">
+    <style>
+        h2{
+            font-family:Arial, Helvetica, sans-serif;
+        }
+        .follow{
+            width: 16%;
+            aspect-ratio: 1;
+            border: 1px solid black;
+            background-size: cover; 
+        }
+        .follow:hover{
+            scale: 0.95;
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/nav') %>
+
+    <div class="container">
+        <div style="margin: 20px 100px;display: flex;align-items: center;flex-direction: column;">
+            <h1 style="font-family:freight-display-pro, freight-text-pro, Georgia, serif;">Contact Us</h1><br>
+            <p>Ready to connect with us? You're in the perfect spot! Whether you have questions, ideas, or just want to say hello,
+                we're here for you. Tell us what you need, and let's start a conversation! Who are you looking to connect with, and 
+                how can we assist you today?</p>
+        </div>
+
+        <div style="margin: 20px 100px;display: flex;flex-direction: column;">
+            <h2>Trying to Reach the Editors?</h2>
+            <h3 style="text-decoration: underline;margin: 10px 0px;">THE BLOG EDITORS</h3>
+            <p>I have a question, tip, photo, story, house tour, link, or idea for you.</p>
+
+            <h2 style="margin: 15px 0px;">Want to talk to someone else?</h2>
+
+            <h3 style="text-decoration: underline;margin: 10px 0px;">TECHNICAL SUPPORTS</h3>
+            <p>Help! Something isn't working right.</p>
+            
+            <h3 style="text-decoration: underline;margin: 10px 0px;">ADVERTISING</h3>
+            <p>I am interested in advertising or partnership with Mr BLOGS.</p>
+
+
+            <h3 style="text-decoration: underline;margin: 10px 0px;">CAREERS</h3>
+            <p>Jobs and Internships. <a href="/careers" style="color: rgb(62, 117, 227);">Get Started.</a></p>
+
+            <h3 style="margin: 10px 0px;">My Data</h3>
+            <p>Your privacy is our utmost priority. We take the safeguarding of your user data seriously, employing state-of-the-art security measures to ensure a safe and secure environment for your online presence.
+
+                Our platform is fortified with robust encryption protocols, creating an impenetrable shield around your personal information. We understand the importance of trust in the digital landscape, and that's why we go above and beyond to implement industry-leading security standards.
+                
+                Rest assured, your data is handled with the utmost care. Our commitment to transparency means you have full control over your information. We adhere to strict privacy policies, and you can trust that your data will never be shared, sold, or compromised in any way.
+                
+                With regular security audits and updates, we stay one step ahead of potential threats, providing you with peace of mind as you navigate and create within our platform. Your privacy is not just a feature; it's a fundamental aspect of our commitment to providing you with a safe and reliable space to express yourself online.
+                
+                Join us in a community where your data is not just protected; it's respected. Your trust is our most valuable asset, and we take every measure to ensure that your experience on our platform is secure and worry-free. Welcome to a space where your privacy is as important to us as it is to you.
+                </p>
+
+            <h3 style="margin: 20px 0px 10px">GENERAL INQUIRIES</h3>
+            <h5>For fast response, raise a query, email us at <a href="mailto:info@mrblog.official.com" target="_blank" style="text-decoration: underline;color: rgb(62, 117, 227);">info@mrblog.official.com</a>. Alternatively, you can call us at 212-966-7174.
+            </h5>
+
+            <button type="button" class="btn btn-primary mt-2 mb-2" id="liveToastBtn" style="width: 150px;">Raise Query</button>
+
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header" style="background-color: rgb(255, 179, 0);">
+                    <img src="/images/query-icon.png" class="rounded me-auto" alt="..." style="height: 30px;">
+                    <strong class="me-auto">CUSTOMER QUERY</strong>
+                    <small>just now</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body" style="background-color: rgb(244, 246, 249);">
+                        <br>
+                        <h6>Hello, <%= locals.user.email %>, We will soon contact you.</h6>
+                        <h6>Thank you</h6>
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin: 20px 0px">Follow us</h3>
+
+            <div class="mb-4" style="display: flex;">
+                
+                <a  href="https://www.linkedin.com" target="_blank" class="follow" 
+                    style="background-image: url(/images/linkedin.jpg);"> </a>
+
+                <a href="https://www.instagram.com" target="_blank" class="follow" 
+                    style="background-image: url(/images/instagram.jpg);"> </a>
+                
+                <a href="https://www.twitter.com" target="_blank" class="follow" 
+                    style="background-image: url(/images/twitter.png);"> </a>
+
+                <a href="https://www.github.com" target="_blank" class="follow" 
+                    style="background-image: url(/images/github.jpg);"> </a>
+
+                <a href="https://www.facebook.com" target="_blank" class="follow" 
+                    style="background-image: url(/images/facebook.png);"> </a>
+
+            </div>
+
+        </div>
+    </div>
+    
+
+    <%- include("./partials/scripts") %>
+
+    <script>
+        const toastTrigger = document.getElementById('liveToastBtn')
+        const toastLiveExample = document.getElementById('liveToast')
+
+        if (toastTrigger) {
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastTrigger.addEventListener('click', () => {
+            toastBootstrap.show()
+        })
+        }
+    </script>
+
+</body>
+</html>

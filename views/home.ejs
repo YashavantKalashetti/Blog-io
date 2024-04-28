@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Home Page</title>
+    <!--  stylesheet -->
+
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body style="background-color:rgb(255, 255, 255);" onload="onload('You have been Sucessfully Logged In')">
+    <%- include('./partials/nav') %>
+      
+     <!-- selecting category of blogs -->
+
+        <% if (locals.loggedIn  === "True") { %>
+            <div id="liveAlertPlaceholder" style="margin: 5px 50px;"></div>
+            <div id="liveAlertPlaceholder2" style="margin: 5px 50px; border: 0.5px solid black;padding: 10px 5px;border-radius: 5px ;background-color: rgb(32, 29, 21);color: rgb(246, 239, 239);">
+                Welcome to our website! By continuing to browse and interact with our site, you are agreeing to the use of cookies. Cookies 
+                are small text files that are stored on your device to enhance your browsing experience. These cookies help us analyze website 
+                traffic, personalize content, and tailor advertisements to your preferences. Your acceptance of cookies allows us to provide you 
+                with a seamless and optimized user experience.
+                <div style="display: flex;justify-content: center;">
+                    <button class="btn btn-primary" onclick="hide()" style="margin-right: 10px;">Accept</button>
+                    <button class="btn btn-primary"  onclick="hide()">Reject</button>
+                </div>
+            </div>
+        <% } %>
+
+        <form action="/" method="POST">
+            <div class="form-floating" style="margin: 10px 50px;">
+                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="category" onselect="post(selected)">
+                    <option selected><a href="/allblogs">All Blogs</a></option>
+                    <option value="Biography">Biography</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Travelling">Travelling</option>
+                    <option value="Health and Fitness">Health and Fitness</option>
+                    <option value="Lifestyle">Lifestyle</option>
+                    <option value="Business">Business</option>
+                    <option value="Others">Others</option>
+                </select>
+                <label for="floatingSelect">Select a category</label>
+                <button class="btn btn-primary mt-1">Search</button>
+            </div>
+        </form>
+      
+
+    <div class="blog-conatainer m-5">
+            <% if (allBlogs.length === 0) { %>
+                <h1 class="design" style="color: red;">Unfortunately, no blogs can be found within this category.</h1>
+            <% } %>
+            <% allBlogs.forEach(function (blog,i) { %>
+                <!-- changes -->
+                <div class="card m-1 mt-2 mb-5 individual" style="width:clamp(300px,93%,300px);min-width: 220px;">
+                    
+                    <div class="hover01 column">
+                        <figure><img src="<%= blog.coverImageURL %>" class="card-img-top" alt="blog cover Photo" ></figure>
+                    </div>
+                      
+                    <div class="card-body">
+                      <h5 class="card-title"style="font-size:larger;"><%= blog.title %></h5>
+                      <div style="display: flex;">
+                        <p class="card-text"><%= JSON.stringify(allBlogs[i].createdBy.fullName).split("\"")[1] %> -  </p>
+                        <p class="card-text" style="margin-left: 5px;"> <%= (JSON.stringify(allBlogs[i].createdAt).split("T")[0]).split("\"")[1] %></p>
+                      </div>
+                      <a href="/blog/<%= blog._id %>" class="btn btn-primary">View Blog</a>
+                    </div>
+                    
+                </div>
+            <% }) %>
+    </div>
+
+    <%- include("./partials/scripts") %>
+    <script>
+        function hide(){
+            document.querySelector("#liveAlertPlaceholder2").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>

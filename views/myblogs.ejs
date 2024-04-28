@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Home Page</title>
+
+    <!--  stylesheet -->
+    <link rel="stylesheet" href="/css/home.css">
+    <style>
+        .myblog-message{
+            /* background-color: aquamarine; */
+            display: flex;
+            justify-content:space-evenly;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .oop-image{
+            width:clamp(200px,30vw,450px);
+            aspect-ratio: 1;
+            margin: 10px 0px;
+        }
+    </style>
+
+</head>
+<body style="background-color:rgb(255, 255, 255);">
+    <%- include('./partials/nav') %>
+
+    <div class="conatainer m-4">
+        <% if (userBlogs.length > 0) { %>
+            <% userBlogs.forEach(function (blog,i) { %>
+                <div class="card m-1 mt-2 mb-5 individual" style="width: 23%;min-width: 300px;">
+                    
+                    <div class="hover01 column">
+                        <figure><img src="<%= blog.coverImageURL %>" class="card-img-top" alt="blog cover Photo" ></figure>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title"style="font-size:larger;"><%= blog.title %></h5>
+                      <div style="display: flex;">
+                        <p class="card-text"><%= JSON.stringify(userBlogs[i].createdBy.fullName).split("\"")[1] %> - </p>
+                        <p class="card-text" style="margin-left: 5px;"> <%= (JSON.stringify(userBlogs[i].createdAt).split("T")[0]).split("\"")[1] %></p>
+                      </div>
+                      <a href="/blog/<%= blog._id %>" class="btn btn-primary">View Blog</a>
+                    </div>
+                </div>
+            <% }) %>
+        <% } else {%>
+            <div class="myblog-message">
+                <img class="oop-image" src="/images/oops.jpg" alt="message">  
+                <div style="padding: 5px 0px 5px 5px;">
+                    <h1 style="font-family:Young Serif; font-size: clamp(30px,4.3vw,55px);">Seems like you don't have any blogs.</h1><br>
+                    <h3 style="font-family:Young Serif; font-size: clamp(25px,3.5vw,45px);">Would you like to create one ????</h3>
+                    <a href="/blog/add-new" class="btn btn-success" style="margin-top: 15px;">Create Blog</a>
+                </div>
+            </div>
+        <% } %>     
+    </div>
+
+    <%- include("./partials/scripts") %>
+</body>
+</html>

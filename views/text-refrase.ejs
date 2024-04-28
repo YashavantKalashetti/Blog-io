@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Add new Blog</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <style>
+        h4{
+            text-decoration: underline;
+        }
+
+        .nav-link:hover{
+            border-bottom: 3.5px solid red;
+            padding: 5px;
+            color: white;
+        }
+    </style>
+</head>
+<body style="background-color: rgb(212, 231, 251);">
+    <%- include('./partials/nav') %>
+    
+    <div class="container mt-5" style="border: 2px solid rgb(14, 14, 14);">
+        <form action="/blog/text-refrase" method="post">
+
+            <h2 class="m-2">Select an Option for blog Body</h2>
+            <label style="display: flex;">
+                <input class="m-2" type="radio" name="body" value="<%= enteredText %>" checked>
+                <div class="mb-3">
+                    <textarea name="" class="form-control" id="body"  rows="7" 
+                    placeholder="<%= enteredText %>"disabled></textarea>
+                </div>
+              </label>
+              <br>
+              <label style="display: flex;">
+                <input class="m-2" type="radio" name="body" value="<%= locals.translatedText %>">
+                <div class="mb-3">
+                    <textarea  class="form-control" id="body"  rows="7"  
+                    placeholder="<%= locals.translatedText %>" disabled></textarea>
+                </div>
+              </label>
+
+              <input style="display: none;" type="text" value="<%= locals.blogId %>" name="blogId" checked>
+
+            <div class="m-3">
+                <button class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <%- include("./partials/footer") %>    
+
+    <%- include("./partials/scripts") %>
+</body>
+</html>

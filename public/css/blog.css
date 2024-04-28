@@ -1,0 +1,21 @@
+.img-container{
+    margin-top: 10px;
+    overflow: hidden;
+    width: 40vw;
+    aspect-ratio: 3/2;
+}
+.img-container img{
+    width: 40vw;
+    aspect-ratio:3/2;
+    /* padding: 1px; */
+    transition: .8s ease-in-out;
+}
+.img-container img:hover{
+    transform: scale(1.1);
+}
+
+.nav-link:hover{
+    border-bottom: 3.5px solid red;
+    padding: 5px;
+    color: white;
+}

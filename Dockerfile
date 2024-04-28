@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 5173
+EXPOSE 5000
 
 # ENV MONGO_URL "mongodb+srv://Yashavant:_Devop_1234@cluster0.tjcvgkn.mongodb.net/?retryWrites=true&w=majority"
 

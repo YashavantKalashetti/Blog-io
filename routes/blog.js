@@ -64,32 +64,36 @@ router.post("/add-new",upload.single("coverImage") ,async (req,res)=>{
             coverImageURL : `/uploads/${req.file.filename}`
         })
     
-        const openai = new OpenAI({
-            apiKey: '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',
-          });
+        // const openai = new OpenAI({
+        //     apiKey: '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',
+        //   });
           
-          const response = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo",
-            messages: [
-              {
-                "role": "system",   
-                "content": "You will be provided with statements, and your task is to convert them to standard English with clear meaning."
-              },
-              {
-                "role": "user",
-                "content": body
-              }
-            ],
-            temperature: 1,
-            max_tokens: 64,
-            top_p: 1,
-          });
+        //   const response = await openai.chat.completions.create({
+        //     model: "gpt-3.5-turbo",
+        //     messages: [
+        //       {
+        //         "role": "system",   
+        //         "content": "You will be provided with statements, and your task is to convert them to standard English with clear meaning."
+        //       },
+        //       {
+        //         "role": "user",
+        //         "content": body
+        //       }
+        //     ],
+        //     temperature: 1,
+        //     max_tokens: 64,
+        //     top_p: 1,
+        //   });
+
+
+
+        return res.status(200).redirect(`/blog/${blog._id}`);
     
-        return res.status(201).render('text-refrase',{
-            enteredText: body, 
-            translatedText: response.choices[0].message.content,
-            blogId:blog._id
-        })
+        // return res.status(201).render('text-refrase',{
+        //     enteredText: body, 
+        //     translatedText: response.choices[0].message.content,
+        //     blogId:blog._id
+        // })
     } catch (error) {
         return res.status(500).json({
             error: error.message
@@ -104,6 +108,11 @@ router.post('/text-refrase',async(req,res)=>{
     const blog = await Blog.updateOne({_id:blogId}, {$set:{body:body}})
     return res.status(200).redirect(`/blog/${blogId}`);
 })
+
+
+
+
+
 
 
 router.get("/:id",async (req,res)=>{

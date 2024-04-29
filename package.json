@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev":"node index.js",
+    "dev": "node index.js",
     "build": "npm run build",
-    "deploy":"firebase deploy --only functions:api"
+    "deploy": "firebase deploy --only functions:api"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cloudinary": "^2.2.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",

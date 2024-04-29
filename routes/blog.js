@@ -5,23 +5,11 @@ const OpenAI = require("openai");
 
 const Blog = require("../models/blog")
 const { validateToken } = require("../services/auth")
+const uploadOnCloudinary = require('../services/cloudinaryUpload.js')
+const upload = require('../services/fileUpload.js')
 
 
 const router = Router();
-
-
-// File Storage Using Multer
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, path.resolve('./public/uploads/'))
-    },
-    filename: function (req, file, cb) {
-      const fileName = `${Date.now()}-${file.originalname}`;
-      cb(null,fileName)
-    }
-})
-
-const upload = multer({ storage: storage })
 
 
 router.get("/add-new",(req,res)=>{
@@ -56,44 +44,29 @@ router.post("/add-new",upload.single("coverImage") ,async (req,res)=>{
     }
 
     try {
+        console.log(req.file)
+        const localFilePath = req.file?.path 
+        if(!localFilePath){
+            return res.status(400).json({error: "Cover Image picture is required"})
+        }
+    
+        const globalLink = await uploadOnCloudinary(localFilePath)
+        if(!globalLink){
+            return res.status(400).json({error: "Cover Image picture is required by cloudinary"})
+        }
+
         const blog = await Blog.create({
             title,
             body,
             category,
             createdBy : req.user._id,
-            coverImageURL : `/uploads/${req.file.filename}`
+            coverImageURL : globalLink.url
         })
     
-        // const openai = new OpenAI({
-        //     apiKey: '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',
-        //   });
-          
-        //   const response = await openai.chat.completions.create({
-        //     model: "gpt-3.5-turbo",
-        //     messages: [
-        //       {
-        //         "role": "system",   
-        //         "content": "You will be provided with statements, and your task is to convert them to standard English with clear meaning."
-        //       },
-        //       {
-        //         "role": "user",
-        //         "content": body
-        //       }
-        //     ],
-        //     temperature: 1,
-        //     max_tokens: 64,
-        //     top_p: 1,
-        //   });
-
 
 
         return res.status(200).redirect(`/blog/${blog._id}`);
     
-        // return res.status(201).render('text-refrase',{
-        //     enteredText: body, 
-        //     translatedText: response.choices[0].message.content,
-        //     blogId:blog._id
-        // })
     } catch (error) {
         return res.status(500).json({
             error: error.message
